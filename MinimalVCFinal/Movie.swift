@@ -14,7 +14,6 @@ struct Movie {
     let posterPath: String
     let overview: String
     let releaseDate: String
-    var coverPath: String?
     var voteCount: NSNumber?
 }
 
@@ -25,7 +24,6 @@ extension Movie {
         static let posterPathKey = "poster_path"
         static let overviewKey = "overview"
         static let releaseDateKey = "release_date"
-        static let coverPathKey = "backdrop_path"
         static let votesKey = "vote_count"
     }
     
@@ -42,7 +40,6 @@ extension Movie {
         self.posterPath = posterPath
         self.overview = overview
         self.releaseDate = releaseDate
-        self.coverPath = json[Key.coverPathKey] as? String
-        self.voteCount = json[Key.votesKey] as? NSNumber ?? 0
+        self.voteCount = json[Key.votesKey] as? NSNumber 
     }
 }

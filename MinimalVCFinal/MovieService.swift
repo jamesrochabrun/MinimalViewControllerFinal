@@ -18,7 +18,7 @@ struct MovieService {
     static let APIKey: String = "34a92f7d77a168fdcd9a46ee1863edf1"
     static let endPoint: String = "https://api.themoviedb.org/3/movie/now_playing?api_key="
     let downloader = JSONDownloader()
-    typealias MoviesNowPlayingCompletionHandler = (Result<[Movie?]>) -> ()
+    typealias MoviesNowPlayingCompletionHandler = (Result<MovieDataSource>) -> ()
     
     func getNowPlayingMovies(completion: @escaping MoviesNowPlayingCompletionHandler) {
         
@@ -40,8 +40,10 @@ struct MovieService {
                         completion(.Error(.jsonParsingFailure))
                         return
                     }
-                    let movieArray = movieJSONFeedArray.map{Movie(json: $0)}
-                    completion(.Success(movieArray))
+                    
+                    let movieArray = movieJSONFeedArray.flatMap{Movie(json: $0)}
+                    let movieDataSource = MovieDataSource(movies: movieArray)
+                    completion(.Success(movieDataSource))
                 }
             }
         }

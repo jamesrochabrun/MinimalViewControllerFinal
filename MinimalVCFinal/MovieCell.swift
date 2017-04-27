@@ -92,7 +92,25 @@ class MovieCell: UITableViewCell {
             ])
     }
     
+    //MARK: - Cell customization
+    func setUpWith(_ viewModel: MovieViewModel) {
+        
+        movieImageView.loadImageUsingCacheWithURLString(viewModel.posterPath, placeHolder: nil) {_ in}
+        movieTitleLabel.text = viewModel.title
+        dateLabel.text = viewModel.releaseDate
+        descriptionLabel.text = viewModel.overview
+        reviewsCountLabel.text = viewModel.voteCount
+
+    }
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
+
+
+
+
