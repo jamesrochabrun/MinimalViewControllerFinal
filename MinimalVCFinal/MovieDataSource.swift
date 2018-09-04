@@ -11,7 +11,7 @@ import UIKit
 
 class MovieDataSource: NSObject, UITableViewDataSource {
     
-    private var movies: [Movie]
+    var movies: [Movie]
     init(movies: [Movie]) {
         self.movies = movies
         super.init()
